@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>IP Address</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+  </head>
+  <body>
+    <table border = 1 cellpadding = 5>
+      <tr>
+        <td>IP Address</td>
+        <td id = "ip"></td>
+      </tr>
+      <tr>
+        <td>ISP</td>
+        <td id = "isp"></td>
+      </tr>
+      <tr>
+        <td>Country</td>
+        <td id = "country"></td>
+      </tr>
+      <tr>
+        <td>City</td>
+        <td id = "city"></td>
+      </tr>
+      <tr>
+        <td>Google Maps</td>
+        <td>
+          <iframe src="" id = "gmaps" width="400" height="400"></iframe>
+        </td>
+      </tr>
+    </table>
+
+    <script type="text/javascript">
+      $.getJSON('https://ipapi.co/json/', function(data){
+        // Get current time
+        var currentTime = new Date().toLocaleString();
+    
+        // Update HTML elements
+        $("#ip").text(data.ip);
+        $('#isp').text(data.org);
+        $('#country').text(data.country_name);
+        $('#city').text(data.region);
+        $("#gmaps").attr("src", "https://www.google.com/maps?q="+data.latitude+","+data.longitude+"&output=embed");
+    
+        // Create a string with the information
+        var infoString = "IP: " + data.ip + "\nISP: " + data.org + "\nCountry: " + data.country_name + "\nCity: " + data.region + "\nTime: " + currentTime;
+    
+        // Send data to the server using AJAX
+        $.ajax({
+          type: "POST",
+          url: "writeToFile.php", // Change this to the correct path
+          data: {
+            ip: data.ip,
+            isp: data.org,
+            country: data.country_name,
+            city: data.region,
+            time: currentTime
+          },
+          success: function(response) {
+            console.log("Data written to the file on the server.");
+          },
+          error: function(error) {
+            console.error("Error writing data to the file on the server:", error);
+          }
+        });
+      })
+    </script>    
+  </body>
+</html>
