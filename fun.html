@@ -5,11 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online Hobbies</title>
   <style>
+    .aspectwrapper {
+      width: 100%;
+      position: relative;
+    }
+
+    .aspectspacer {
+      width: 100%;
+      /* let the enlarged image height push .aspectwrapper's bottom edge */
+    }
+
+    .content {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      outline: thin dashed green;
+    }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       max-width: 609px;
       min-width: 609px;
-      margin: 0 auto;
+      margin: auto;
       padding-left: 40px;
       padding-right: 40px;
       padding-bottom: 40px;
@@ -39,6 +58,7 @@
 </head>
 
 <body>
+  <div class="aspectwrapper">
   <html>
   <h1>
     Online
@@ -105,6 +125,7 @@
     I also make skiing videos for my family and friends to enjoy on facebook.
   </p>
   <br>
+
   </html>
   <html>
   <h1>
@@ -159,4 +180,5 @@
   <a href="#">Back to top</a>
 
   </html>
+  </div>
 </body>
